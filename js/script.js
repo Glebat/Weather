@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         gorod = input.value.trim();
         const apiKey = '201ea6c5a0e8449faac204622243011';
-        const url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${gorod}&days=3`;
+        const url = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${gorod}&days=3`;
 
         console.log(gorod);
 
