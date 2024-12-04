@@ -1,4 +1,4 @@
-
+import { displayWeatherData } from './apizamen.js';
 document.addEventListener('DOMContentLoaded', function () {
     const input = document.getElementById('inputcity');
     const form = document.getElementById('form');
@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function updatetime() {
         const timeupdate = document.querySelectorAll('.time-w');
-        timeupdate.forEach(element => {
-            element.textContent = times();
+        timeupdate.forEach(eс => {
+            eс.textContent = times();
         });
     }
 

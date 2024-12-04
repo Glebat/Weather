@@ -1,28 +1,11 @@
+import { translations } from './array.js';
 
-function displayWeatherData(data) {
-// отображение маленьких  и больших карт карта сегодня
-document.querySelectorAll('.time-w-city').forEach(ec => ec.innerHTML = data.location.name);
-//document.querySelectorAll('.time-w').forEach(ec => ec.innerHTML = data.location.localtime.split(' ')[1]);
-document.querySelectorAll('.temperature-today').forEach(ec => ec.innerHTML = data.current.temp_c + '°C');
+export function translate (podtext) {
+    let orig = podtext;
+    let translated = translations[orig] || orig;
+    return translated;
+}
 
-
-    
-
-   
-
-    
- 
-
-
-    
-
-
-//document.querySelectorAll('.podtext-today').forEach(ec => ec.innerHTML = data.current.condition.text);
-document.querySelectorAll('.speed-today').forEach(ec => {
-    let maxwind_kph = data.forecast.forecastday[0].day.maxwind_kph;
-    ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
-});
-document.querySelectorAll('.avghumidity-today').forEach(ec => ec.innerHTML = data.forecast.forecastday[0].day.avghumidity + '%');
 function convertTimeTo24HourFormat(time) {
     let [timePart, period] = time.split(' ');
     let [hours, minutes] = timePart.split(':').map(Number);
@@ -35,30 +18,43 @@ function convertTimeTo24HourFormat(time) {
 
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
 }
-document.querySelectorAll('.sunr').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunrise);});
+
+export function displayWeatherData(data) {
+// отображение маленьких  и больших карт карта сегодня
+document.querySelectorAll('.time-w-city').forEach(ec => ec.innerHTML = data.location.name);
+//document.querySelectorAll('.time-w').forEach(ec => ec.innerHTML = data.location.localtime.split(' ')[1]);
+document.querySelectorAll('.temperature-today').forEach(ec => ec.innerHTML = data.current.temp_c + '°C');
+document.querySelectorAll('.podtext-today').forEach(ec => {ec.innerHTML = translate(data.forecast.forecastday[0].day.condition.text)});
+document.querySelectorAll('.speed-today').forEach(ec => {
+    let maxwind_kph = data.forecast.forecastday[0].day.maxwind_kph;
+    ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
+});
+document.querySelectorAll('.avghumidity-today').forEach(ec => ec.innerHTML = data.forecast.forecastday[0].day.avghumidity + '%');
+
+document.querySelectorAll('.sunr').forEach(ec => ec.innerHTML = data.forecast.forecastday[0].astro.sunrise);
 document.querySelectorAll('.photo-today').forEach(ec => ec.src = data.forecast.forecastday[0].day.condition.icon);
     
 //карточка завтра 
 document.querySelectorAll('.temperature-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].day.avgtemp_c+ '°C');
-document.querySelectorAll('.podtext-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].day.condition.text);
+document.querySelectorAll('.podtext-tomorrow').forEach(ec => {ec.innerHTML = translate(data.forecast.forecastday[1].day.condition.text)});
 document.querySelectorAll('.speed-tomorrow').forEach(ec => {
     let maxwind_kph = data.forecast.forecastday[1].day.maxwind_kph;
     ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
 });    
 document.querySelectorAll('.avghumidity-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].day.avghumidity + '%');
-document.querySelectorAll('.sunr-tomorrow').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[1].astro.sunrise);});
+document.querySelectorAll('.sunr-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].astro.sunrise);
 document.querySelectorAll('.photo-tomorrow').forEach(ec => ec.src = data.forecast.forecastday[1].day.condition.icon);
 
 //карточка послезавтра
 
 document.querySelectorAll('.temperature-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].day.avgtemp_c+ '°C');
-document.querySelectorAll('.podtext-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].day.condition.text);
+document.querySelectorAll('.podtext-aftertomorrow').forEach(ec => {ec.innerHTML = translate(data.forecast.forecastday[2].day.condition.text)});
 document.querySelectorAll('.speed-aftertomorrow').forEach(ec => {
     let maxwind_kph = data.forecast.forecastday[2].day.maxwind_kph;
     ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
 });    
 document.querySelectorAll('.avghumidity-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].day.avghumidity + '%');
-document.querySelectorAll('.sunr-aftertomorrow').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[2].astro.sunrise);});
+document.querySelectorAll('.sunr-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].astro.sunrise);
 document.querySelectorAll('.photo-aftertomorrow').forEach(ec => ec.src = data.forecast.forecastday[2].day.condition.icon);
 
 // работа с таблицей 
@@ -115,8 +111,17 @@ document.querySelectorAll('.night-sensations').forEach(ec => ec.innerHTML = data
 
 //время 
 
-document.querySelectorAll('.time-sunrise').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunrise);});
-document.querySelectorAll('.time-sunset').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunset);});
+
+
+
+document.querySelectorAll('.time-sunrise').forEach(ec => {
+    const sunr = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunrise);
+    ec.innerHTML = sunr + '*';
+});
+document.querySelectorAll('.time-sunset').forEach(ec => {
+    const suns = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunset);
+    ec.innerHTML = suns + '*';
+});
 //forecast.forecastday[0].astro.sunrise
 }
 

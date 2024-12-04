@@ -1,5 +1,6 @@
-const translations = {
+export const translations = {
     "Sunny": "Солнечно",
+    "Clear": "Ясно",
     "Partly cloudy": "Переменная облачность",
     "Cloudy": "Облачно",
     "Overcast": "Пасмурно",
@@ -46,7 +47,8 @@ const translations = {
     "Patchy light rain with thunder": "Местами небольшой дождь с грозой",
     "Moderate or heavy rain with thunder": "Умеренный или сильный дождь с грозой",
     "Patchy light snow with thunder": "Местами небольшой снег с грозой",
-    "Moderate or heavy snow with thunder": "Умеренный или сильный снег с грозой"
+    "Moderate or heavy snow with thunder": "Умеренный или сильный снег с грозой",
+    "Patchy rain nearby": "Местами дождь поблизости"
 };
 
-export default translations;
+
