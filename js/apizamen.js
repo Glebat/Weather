@@ -31,7 +31,7 @@ document.querySelectorAll('.speed-today').forEach(ec => {
 });
 document.querySelectorAll('.avghumidity-today').forEach(ec => ec.innerHTML = data.forecast.forecastday[0].day.avghumidity + '%');
 
-document.querySelectorAll('.sunr').forEach(ec => ec.innerHTML = data.forecast.forecastday[0].astro.sunrise);
+document.querySelectorAll('.sunr').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[0].astro.sunrise)});
 document.querySelectorAll('.photo-today').forEach(ec => ec.src = data.forecast.forecastday[0].day.condition.icon);
     
 //карточка завтра 
@@ -42,7 +42,7 @@ document.querySelectorAll('.speed-tomorrow').forEach(ec => {
     ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
 });    
 document.querySelectorAll('.avghumidity-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].day.avghumidity + '%');
-document.querySelectorAll('.sunr-tomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[1].astro.sunrise);
+document.querySelectorAll('.sunr-tomorrow').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[1].astro.sunrise)});
 document.querySelectorAll('.photo-tomorrow').forEach(ec => ec.src = data.forecast.forecastday[1].day.condition.icon);
 
 //карточка послезавтра
@@ -54,7 +54,7 @@ document.querySelectorAll('.speed-aftertomorrow').forEach(ec => {
     ec.innerHTML = (maxwind_kph * 0.277778).toString().slice(0, 4) + 'м/c';
 });    
 document.querySelectorAll('.avghumidity-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].day.avghumidity + '%');
-document.querySelectorAll('.sunr-aftertomorrow').forEach(ec => ec.innerHTML = data.forecast.forecastday[2].astro.sunrise);
+document.querySelectorAll('.sunr-aftertomorrow').forEach(ec => {ec.innerHTML = convertTimeTo24HourFormat(data.forecast.forecastday[2].astro.sunrise)});
 document.querySelectorAll('.photo-aftertomorrow').forEach(ec => ec.src = data.forecast.forecastday[2].day.condition.icon);
 
 // работа с таблицей 
